@@ -1,2 +1,0 @@
-# madLib
-Thinkful madLib app
