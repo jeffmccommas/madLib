@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="ngMadLibs" data-ng-controller="madLibsController">
+
+<head>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css"/>
+
+    <title>ngMadLibs - version: {{version}}</title>
+</head>
+
+<body>
+<!-- header -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 header">
+                <div class="col-md-4 border row-height-min text-center">
+                    <img src="http://www.michael-whelan.net/thinkful-angular-ngMadLibs/assets/images/mad-lib-happy-face.png"
+                         class="smiley"/>
+                </div>
+                <div class="col-md-8 text-center almost-border row-height-min text-center">
+                    <img src="http://www.michael-whelan.net/thinkful-angular-ngMadLibs/assets/images/ng-mad-libs-logo.png"
+                         class="logo"/>
+
+                    <p class="superBig">Automate This!</p>
+
+                    <h2>Please provide the following words:</h2>
+                </div>
+            </div>
+    </div>
+
+    <!-- inputs -->
+    <div class="row content" data-ng-hide="hideForm && madForm.$valid">
+        <div class="col-md-12 border override">
+            <form name="madForm" data-ng-submit="submitted=true;submit()">
+                <div class="col-md-offset-3 col-md-4">
+                        <h2>Select a gender:</h2>
+
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                       data-ng-checked="{{gender.pronoun == 'he'}}"
+                                       data-ng-click="gender.pronoun='he';gender.poss='his'"
+                                       value="male">
+                                Male
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2"
+                                       data-ng-checked="{{gender.pronoun == 'she'}}"
+                                       data-ng-click="gender.pronoun='she';gender.possessive='her'"
+                                       value="female">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center">
+                            <h2>Provide the following words:</h2>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="form-group"><input class="form-control" type="text" placeholder="name"
+                                                            data-ng-model="data.name" required></div>
+                            <div class="form-group"><input class="form-control" type="text" placeholder="job title"
+                                                            data-ng-model="data.job_title" required></div>
+                            <input class="form-control" type="text" placeholder="tedious task" data-ng-model="data.tedious_task" required>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="form-group"><input class="form-control" type="text" placeholder="dirty task"
+                                                            data-ng-model="data.dirty_task" required></div>
+                            <div class="form-group"><input class="form-control" type="text" placeholder="celebrity"
+                                                            data-ng-model="data.celebrity" required></div>
+                            <div class="form-group"><input class="form-control" type="text" placeholder="useless skill"
+                                                            data-ng-model="data.useless_skill" required></div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="form-group"><input class="form-control" type="text"
+                                                            placeholder="obnoxiuous celebrity"
+                                                            data-ng-model="data.obnoxiuous_celebrity"
+                                                            required></div>
+                            <div class="form-group"><input class="form-control" type="number" placeholder="huge number"
+                                                            data-ng-model="data.huge_number" required></div>
+                            <div class="form-group"><input class="form-control" type="text" placeholder="adjective"
+                                                            data-ng-model="data.adjective" required></div>
+                        </div>
+                        <div class="row text-center">
+                            <button type="submit" class="btn btn-lg btn-primary submit-btn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <!-- results -->
+    <div data-ng-show="hideForm && madForm.$valid" class="row content results">
+        <div class="col-md-12 border override">
+            <p><span class="standout">{{data.name}}</span> was a <span class="standout">{{data.job_title}}</span> who
+                loved technology. Although {{gender.pronoun}} loved parts of {{poss}} job, {{gender.pronoun}} absolutely
+                hated <span class="standout">{{data.tedious_task}}</span> and <span
+                        class="standout">{{data.dirty_task}}</span>. So, <span class="standout">{{data.my_name}}</span>
+                met with {{poss}} life mentor <span class="standout">{{data.celebrity}}</span> who told {{poss}} to
+                learn how to <span class="standout">{{data.useless_skill}}</span> with Thinkful. Thinkful didn't offer a
+                course on <span class="standout">{{data.useless_skill}}</span> so {{gender.pronoun}} studied programming
+                instead.</p>
+
+            <p>What a great decision! With {{poss}} new skills, <span class="standout">{{data.my_name}}</span> built
+                a(n) <span class="standout">{{data.adjective}}</span> robot named <span class="standout">{{data.obnoxiuous_celebrity}}</span>
+                that not only loved <span class="standout">{{data.dirty_task}}</span> but did it <span class="standout">{{data.huge_number}}</span>
+                faster.</p>
+
+            <div class="row text-center">
+                <button type="button" data-ng-click="reset()" class="btn btn-lg btn-primary reset-btn">Reset</button>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer>
+        <span>ngMadLibs - version: {{version}}</span>
+    </footer>
+</div>
+
+<script data-require="jquery@*" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script data-require="angular.js@*" data-semver="1.4.0-beta.6"
+        src="https://code.angularjs.org/1.4.0-beta.6/angular.js"></script>
+<script data-require="angular-animate@*" data-semver="1.4.0-beta.6"
+        src="https://code.angularjs.org/1.4.0-beta.6/angular-animate.js"></script>
+<script src="script.js"></script>
+</body>
+
+</html>
